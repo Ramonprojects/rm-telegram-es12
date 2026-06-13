@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>MagoTips — O Canal Que Virou Febre no Telegram</title>
+
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '953058917590545');
+  fbq('track', 'PageView');
+
+  async function trackLead(e) {
+    e.preventDefault();
+    const eventId = 'cr_' + Date.now();
+    fbq('track', 'CompleteRegistration', {}, { eventID: eventId });
+    try {
+      await fetch('https://api-ramon-production.up.railway.app/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fbp: document.cookie.match(/_fbp=([^;]+)/)?.[1] || null,
+          fbc: document.cookie.match(/_fbc=([^;]+)/)?.[1] || null,
+          userAgent: navigator.userAgent,
+          eventId: eventId
+        })
+      });
+    } catch(err) {}
+    window.location.href = 'https://smartico-dash.up.railway.app/track/34c58208-a263-4454-bbc4-6b736e47d42b/redirect?utm_campaign=EsportivaBotRM';
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: #060b14;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #060b14;
+      min-height: 100vh;
+    }
+
+    /* ── TOP BADGE ── */
+    .top-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      background: #060b14;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .badge-icon {
+      width: 18px; height: 18px;
+      background: #229ED9;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .badge-icon svg { width: 11px; height: 11px; }
+    .badge-pill .hl { color: #229ED9; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      max-height: 42vh;
+      overflow: hidden;
+      background: #060b14;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(180deg, #060e1a 0%, #060b14 100%);
+      font-size: 14px; color: #229ED9; font-weight: 600;
+      letter-spacing: 1px; text-align: center; padding: 20px;
+      position: absolute; inset: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(6,10,6,0.0) 0%,
+        rgba(6,10,6,0.0) 30%,
+        rgba(6,10,6,0.6) 55%,
+        rgba(6,10,6,0.95) 75%,
+        rgba(6,10,6,1.0) 100%
+      );
+      box-shadow: inset 25px 0 30px rgba(6,10,6,1), inset -25px 0 30px rgba(6,10,6,1);
+    }
+    .hero-glow {
+      display: none;
+    }
+
+    /* ── BODY CONTENT ── */
+    .body {
+      padding: 0 18px 40px;
+      margin-top: -60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── HEADLINE ── */
+    .headline {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .headline .line1 {
+      font-size: clamp(30px, 8.5vw, 44px);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      color: #fff;
+      display: block;
+      line-height: 1.0;
+    }
+    .headline .line2 {
+      font-size: clamp(32px, 9vw, 48px);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      color: #229ED9;
+      display: block;
+      line-height: 1.0;
+      text-shadow: 0 0 28px rgba(34,158,217,0.45);
+    }
+    .headline .line3 {
+      font-size: clamp(17px, 4.8vw, 24px);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      color: #fff;
+      display: block;
+      line-height: 1.1;
+      margin-top: 4px;
+    }
+
+    /* ── SUBTITLE ── */
+    .subtitle {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 20px;
+      padding: 0 4px;
+    }
+    .subtitle .wpp-ic { flex-shrink: 0; margin-top: 1px; }
+    .subtitle .wpp-ic svg { width: 19px; height: 19px; display: block; }
+    .subtitle .hl { color: #229ED9; font-weight: 600; }
+
+    /* ── CTA ROW ── */
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .arrow-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex-shrink: 0;
+      animation: arrowBounce 1.4s ease-in-out infinite;
+    }
+    .arrow-group.flip { transform: scaleX(-1); animation: arrowBounceR 1.4s ease-in-out infinite; }
+    .arrow-group svg { width: 18px; height: 18px; fill: #229ED9; display: block; }
+    @keyframes arrowBounce {
+      0%,100% { transform: translateX(0); }
+      50% { transform: translateX(-5px); }
+    }
+    @keyframes arrowBounceR {
+      0%,100% { transform: scaleX(-1) translateX(0); }
+      50% { transform: scaleX(-1) translateX(-5px); }
+    }
+
+    .cta-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: #229ED9;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #000;
+      cursor: pointer;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      animation: ctaPulse 2s ease-in-out infinite;
+    }
+    @keyframes ctaPulse {
+      0%,100% { box-shadow: 0 0 18px rgba(34,158,217,0.5), 0 4px 28px rgba(34,158,217,0.3); }
+      50% { box-shadow: 0 0 38px rgba(34,158,217,0.85), 0 8px 44px rgba(34,158,217,0.55); }
+    }
+    .cta-btn::after {
+      content: '';
+      position: absolute; top: 0; left: -70%;
+      width: 45%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      animation: ctaShine 2.8s ease-in-out infinite;
+    }
+    @keyframes ctaShine { 0%{left:-70%} 60%,100%{left:130%} }
+    .cta-btn:hover { animation: none; opacity: 0.92; }
+    .cta-btn:active { transform: scale(0.98); }
+
+    .wpp-bubble {
+      width: 46px; height: 46px;
+      background: rgba(0,0,0,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .wpp-bubble svg { width: 28px; height: 28px; }
+
+    .cta-texts { line-height: 1; }
+    .cta-main-text {
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      line-height: 1.15;
+    }
+    .cta-sub-text {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.65;
+      margin-top: 4px;
+    }
+
+    /* ── STATS BAR ── */
+    .stats {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .stat-card {
+      flex: 1;
+      background: #080f1a;
+      border: 1px solid rgba(34,158,217,0.15);
+      border-radius: 12px;
+      padding: 14px 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .stat-icon-box {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .stat-icon-box svg {
+      width: 26px; height: 26px;
+      stroke: #229ED9;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .stat-name {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.25;
+      letter-spacing: 0.2px;
+    }
+    .stat-detail {
+      font-size: 9.5px;
+      color: #666;
+      line-height: 1.3;
+    }
+
+    /* ── SOCIAL PROOF ── */
+    .social {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 15px;
+      background: #080f1a;
+      border: 1px solid rgba(34,158,217,0.1);
+      border-radius: 12px;
+    }
+    .av-stack {
+      display: flex;
+      flex-shrink: 0;
+    }
+    .av {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid #060b14;
+      margin-left: -9px;
+      background: #0d1b2a;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+    .av:first-child { margin-left: 0; }
+    .av img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .social-text { font-size: 13px; line-height: 1.5; color: #aaa; }
+    .social-text .stars { color: #f5c518; font-size: 14px; display: block; margin-bottom: 2px; letter-spacing: 1px; }
+    .social-text strong { color: #fff; }
+    .social-text .hl { color: #229ED9; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- BADGE TOPO -->
+  <div class="top-badge">
+    <div class="badge-pill">
+      <div class="badge-icon">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 6.5l2.5 2.5 5.5-5.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      O CANAL&nbsp;<span class="hl">MAIS FALADO</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero-img" src="1 (1).jpg" alt="MagoTips"
+      onerror="this.style.display='none'; document.querySelector('.hero-placeholder').style.display='flex'">
+    <div class="hero-placeholder" style="display:none;">
+      📷 Coloque sua foto aqui<br>
+      <small style="opacity:.5;margin-top:8px;font-size:10px;font-style:italic">Substitua "SUA_FOTO_AQUI.jpg"</small>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-glow"></div>
+  </div>
+
+  <!-- CORPO -->
+  <div class="body">
+
+    <!-- HEADLINE -->
+    <div class="headline">
+      <span class="line1">O Canal Que</span>
+      <span class="line2">Virou Febre</span>
+      <span class="line3">Todo Mundo Está Falando.</span>
+    </div>
+
+    <!-- SUBTITLE -->
+    <div class="subtitle">
+      <span class="wpp-ic">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" fill="#229ED9"/>
+          <path d="M17.5 7.5l-2.3 10.5c-.17.76-.63.94-1.28.59l-3.5-2.58-1.69 1.63c-.19.19-.35.35-.71.35l.25-3.57 6.5-5.87c.28-.25-.06-.39-.44-.14L6.5 13.5 3.07 12.44c-.74-.23-.75-.74.15-1.09l13.18-5.08c.62-.23 1.16.14.1 1.23z" fill="white"/>
+        </svg>
+      </span>
+      <span>Quando algo funciona, todo mundo descobre. Entre agora e entenda por que <span class="hl">somos o mais comentado</span>.</span>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-row">
+      <div class="arrow-group">
+        <svg viewBox="0 0 10 14"><path d="M1 1l8 6-8 6" fill="#229ED9"/></svg>
+        <svg viewBox="0 0 10 14"><path d="M1 1l8 6-8 6" fill="#229ED9"/></svg>
+      </div>
+
+      <a class="cta-btn" href="https://smartico-dash.up.railway.app/track/34c58208-a263-4454-bbc4-6b736e47d42b/redirect?utm_campaign=EsportivaBotRM" onclick="trackLead(event)">
+        <div class="wpp-bubble">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" fill="white"/>
+            <path d="M17.5 7.5l-2.3 10.5c-.17.76-.63.94-1.28.59l-3.5-2.58-1.69 1.63c-.19.19-.35.35-.71.35l.25-3.57 6.5-5.87c.28-.25-.06-.39-.44-.14L6.5 13.5 3.07 12.44c-.74-.23-.75-.74.15-1.09l13.18-5.08c.62-.23 1.16.14.1 1.23z" fill="#229ED9"/>
+          </svg>
+        </div>
+        <div class="cta-texts">
+          <span class="cta-main-text">Descobrir Por Que É Febre</span>
+          <span class="cta-sub-text">💬 Mais Comentado · Grátis</span>
+        </div>
+      </a>
+
+      <div class="arrow-group flip">
+        <svg viewBox="0 0 10 14"><path d="M1 1l8 6-8 6" fill="#229ED9"/></svg>
+        <svg viewBox="0 0 10 14"><path d="M1 1l8 6-8 6" fill="#229ED9"/></svg>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="stat-name">Viral<br>Telegram</div>
+        <div class="stat-detail">Mais compartilhado</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon-box">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 3"/>
+          </svg>
+        </div>
+        <div class="stat-name">Todo Dia<br>Cresce</div>
+        <div class="stat-detail">Novos membros</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div class="stat-name">+12.000</div>
+        <div class="stat-detail">Já viram o hype</div>
+      </div>
+    </div>
+
+    <!-- SOCIAL PROOF -->
+    <div class="social">
+      <div class="av-stack">
+        <div class="av"><img src="Gemini_Generated_Image_lgqedhlgqedhlgqe.png" alt=""></div>
+        <div class="av"><img src="Gemini_Generated_Image_lgqedhlgqedhlgqe (1).png" alt=""></div>
+        <div class="av"><img src="Gemini_Generated_Image_lgqedhlgqedhlgqe (2).png" alt=""></div>
+        <div class="av"><img src="Gemini_Generated_Image_lgqedhlgqedhlgqe (3).png" alt=""></div>
+        <div class="av"><img src="Gemini_Generated_Image_lgqedhlgqedhlgqe (4).png" alt=""></div>
+      </div>
+      <div class="social-text">
+        <span class="stars">★★★★★</span>
+        <strong>+12.000 pessoas</strong> já descobriram e estão <span class="hl">falando disso</span>!
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
